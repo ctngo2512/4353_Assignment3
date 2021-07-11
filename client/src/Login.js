@@ -33,14 +33,14 @@ const Login = (props) => {
                     {hasAccount ? (
                         //if has account, sign in
                         <>
-                        <button onClick={handleLogin}>Sign In</button>
+                        <button className="signin" onClick={handleLogin}>Sign In</button>
                         <p>Don't have an account? 
                             <span onClick={() => setHasAccount(!hasAccount)}>Sign Up</span></p>
                         </>
                     ) : (
                         //if doesn't have account, sign up
                         <>
-                        <button onClick={handleSignup}>Sign Up</button>
+                        <button className="signup" onClick={handleSignup}>Sign Up</button>
                         <p>Have an account? 
                             <span onClick={() => setHasAccount(!hasAccount)}>Sign In</span></p>
                         </>
