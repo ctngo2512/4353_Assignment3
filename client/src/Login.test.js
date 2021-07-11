@@ -1,7 +1,9 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import Login from './Login';
 import App from './App';
+import hasAccount from './Login';
 
     describe('Login component tests', ()=> {
         const wrapper = shallow(<Login />);
@@ -13,7 +15,15 @@ import App from './App';
 
             //Button should have matching text
             expect(wrapper.find('Button').text()).toEqual('Sign Up');
+           
+            //Testing if the Sign In Button appears when a user has an account
+            const wrapper2 = shallow(<Login hasAccount = {hasAccount}/>);
+
+            expect(wrapper2.find('Button').text()).toEqual('Sign In');
+            
+           
         });
+            
 
         it('should have input for email and password', ()=> {
             //Email and password input field should be present
