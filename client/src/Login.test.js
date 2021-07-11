@@ -11,6 +11,11 @@ import hasAccount from './Login';
             //There should be only one button
             expect(wrapper.find('Button')).toHaveLength(1);
 
+            //Button should be undefined after being clicked
+            expect(wrapper.find('Button')
+            .type().defaultProps.type)
+            .toEqual(undefined);
+
             //Button should have matching text
             expect(wrapper.find('Button').text()).toEqual('Sign Up');
            
@@ -37,5 +42,17 @@ import hasAccount from './Login';
             //console.log("TEST THIS" + wrapper.find('.email').text() + "TEST");
            
         });
+
+        it('should test email and password presence', () => {
+
+            //should return true 
+            expect(validateEmailAndPasswordPresence('email@email.com', 
+            'password').toEqual(true);
+
+            //should return false
+             expect(validateEmailAndPasswordPresence('', 
+            '').toEqual(false);
+       });
+
 
     });
