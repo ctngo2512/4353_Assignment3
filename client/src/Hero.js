@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import fire from "./fire";
 import ContactForm from "./contactForm";
 import FuelForm from './fuel';
+import {Button} from 'react-bootstrap';
 
 //runs profile page and fuel page
 const Hero = ({handleLogout}) => {

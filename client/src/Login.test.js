@@ -34,6 +34,11 @@ import hasAccount from './Login';
             expect(wrapper.find('.password')).toHaveLength(1);
         });
 
+        it('should an avatar', ()=> {
+            //login logo should be displayed
+            expect(wrapper.find('.image')).toHaveLength(1);
+        });
+
         it('should have an empty email and password state var', ()=> {
             //Optionally test to check if password and email are empty strings on 
               // setup
@@ -42,17 +47,5 @@ import hasAccount from './Login';
             //console.log("TEST THIS" + wrapper.find('.email').text() + "TEST");
            
         });
-
-        it('should test email and password presence', () => {
-
-            //should return true 
-            expect(validateEmailAndPasswordPresence('email@email.com', 
-            'password').toEqual(true);
-
-            //should return false
-             expect(validateEmailAndPasswordPresence('', 
-            '').toEqual(false);
-       });
-
-
+        
     });
