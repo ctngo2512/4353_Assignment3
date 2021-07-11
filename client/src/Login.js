@@ -1,5 +1,6 @@
 import React from 'react';
 import loginImg from "./loginImg.png";
+import {Button} from 'react-bootstrap';
 
 //login page
 const Login = (props) => {
@@ -33,14 +34,14 @@ const Login = (props) => {
                     {hasAccount ? (
                         //if has account, sign in
                         <>
-                        <button className="signin" onClick={handleLogin}>Sign In</button>
+                        <Button onClick={handleLogin}>Sign In</Button>
                         <p>Don't have an account? 
                             <span onClick={() => setHasAccount(!hasAccount)}>Sign Up</span></p>
                         </>
                     ) : (
                         //if doesn't have account, sign up
                         <>
-                        <button className="signup" onClick={handleSignup}>Sign Up</button>
+                        <Button onClick={handleSignup}>Sign Up</Button>
                         <p>Have an account? 
                             <span onClick={() => setHasAccount(!hasAccount)}>Sign In</span></p>
                         </>

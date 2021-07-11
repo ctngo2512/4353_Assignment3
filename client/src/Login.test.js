@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 import Login from './Login';
 import App from './App';
 
@@ -9,15 +9,10 @@ import App from './App';
         it('should have a btn component', ()=> {
 
             //There should be only one button
-            expect(wrapper.find('signin')).toHaveLength(1);
-
-            //Button should be of type button
-            expect(wrapper.find('signin')
-            .type().defaultProps.type)
-            .toEqual('button');
+            expect(wrapper.find('Button')).toHaveLength(1);
 
             //Button should have matching text
-            expect(wrapper.find('signin').text()).toEqual('Sign In');
+            expect(wrapper.find('Button').text()).toEqual('Sign Up');
         });
 
         it('should have input for email and password', ()=> {
