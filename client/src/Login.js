@@ -25,10 +25,10 @@ const Login = (props) => {
                     <img src={loginImg}/>
                 </div>
                 <label>Username</label>
-                <input type="text" onClick = {clearErrors} autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input className="email" type="text" onClick = {clearErrors} autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
                 <p className="errorMsg">{emailError}</p>
                 <label>Password</label>
-                <input type="password" required value = {password} onChange={(e) => setPassword(e.target.value)} />
+                <input className="password" type="password" required value = {password} onChange={(e) => setPassword(e.target.value)} />
                 <p className="errorMsg">{passwordError}</p>
                 <div className="btnContainer">
                     {hasAccount ? (
