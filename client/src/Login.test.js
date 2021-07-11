@@ -32,8 +32,10 @@ import hasAccount from './Login';
         it('should have an empty email and password state var', ()=> {
             //Optionally test to check if password and email are empty strings on 
               // setup
-            expect(wrapper.find(Login).dive().state('email')).toEqual('');
-            expect(wrapper.find(Login).dive().state('password')).toEqual('');
+            expect(wrapper.find('.email').text()).toEqual('');
+            expect(wrapper.find('.password').text()).toEqual('');
+            //console.log("TEST THIS" + wrapper.find('.email').text() + "TEST");
+           
         });
 
     });
