@@ -6,6 +6,10 @@ import hasAccount from './Login';
     describe('Login component tests', ()=> {
         const wrapper = shallow(<Login />);
 
+        it("renders without crashing", () => {
+            shallow(<Login />);
+        });
+
         it('should have a btn component', ()=> {
 
             //There should be only one button

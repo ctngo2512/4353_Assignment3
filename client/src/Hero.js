@@ -41,7 +41,6 @@ const Hero = ({handleLogout}) => {
             {count ? (
                 //runs fuel page
             <div className="container">
-            
                 <nav>
                     <h2>Welcome</h2>
                     <Button className="midButton" onClick = {goBack}>Back</Button>
