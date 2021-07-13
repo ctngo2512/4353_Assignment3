@@ -81,11 +81,6 @@ describe('Login component tests', ()=> {
   it("should store user in db on GoogleOAuth", async () => {
     const wrapped = testEnv.wrap(api.onUserCreate);
 
-    const testUser = {
-      uid: "122",
-      displayName: "lee"
-    };
-
   const testUser = {
       uid: "122",
       displayName: "lee"
