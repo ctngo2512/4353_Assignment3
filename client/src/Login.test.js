@@ -63,7 +63,6 @@ describe('Login component tests', ()=> {
       adminStub = jest.spyOn(admin, "initializeApp");
   
       // after initializeApp call, we load our functions
-      api = require("./index");
   });
 
   afterAll(() => {
