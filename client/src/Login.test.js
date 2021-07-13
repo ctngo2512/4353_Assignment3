@@ -2,8 +2,17 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import Login from './Login';
 import hasAccount from './Login';
+import functions from "firebase-functions-test";
+import * as admin from "firebase-admin";
+import * as path from "path";
+
+const projectConfig = {
+    projectId: "login-e839c",
+    databaseURL: "https://login-e839c-default-rtdb.firebaseio.com/"
+  };
 
     describe('Login component tests', ()=> {
+        let adminStub, api;
         const wrapper = shallow(<Login />);
 
         it("renders without crashing", () => {
@@ -27,11 +36,8 @@ import hasAccount from './Login';
             const wrapper2 = shallow(<Login hasAccount = {hasAccount}/>);
 
             expect(wrapper2.find('Button').text()).toEqual('Sign In');
-            
-           
         });
             
-
         it('should have input for email and password', ()=> {
             //Email and password input field should be present
             expect(wrapper.find('.email')).toHaveLength(1);
@@ -51,5 +57,53 @@ import hasAccount from './Login';
             //console.log("TEST THIS" + wrapper.find('.email').text() + "TEST");
            
         });
+
+        beforeAll(() => {
+            // you can use `sinon.stub` instead
+            adminStub = jest.spyOn(admin, "initializeApp");
+        
+            // after initializeApp call, we load our functions
+            api = require("../index");
+          });
+
+        afterAll(() => {
+          // clean things up
+          adminStub.mockRestore();
+          testEnv.cleanup();
+      
+          // reset our database
+          admin
+            .database()
+            .ref("users")
+            .remove();
+        });
+
+        it("should store user in db on GoogleOAuth", async () => {
+          const wrapped = testEnv.wrap(api.onUserCreate);
+      
+          const testUser = {
+            uid: "122",
+            displayName: "lee"
+          };
+      
+        const testUser = {
+            uid: "122",
+            displayName: "lee"
+          };
+        
+            // wrap your `onUserCreate` method and pass parameter: user
+            // for the sake of brevity, I omitted other `UserRecord` properties.
+            // you can check https://firebase.google.com/docs/reference/js/firebase.User for more information
+            await wrapped(testUser);
+        
+            // we read our user from database
+            const createdUser = await admin
+              .database()
+              .ref(`/users/${testUser.uid}`)
+              .once("value");
+        
+            // we expect our newly created user to have zero points
+            expect(createdUser.val()).toHaveProperty("points", 0);
+          });
         
     });
