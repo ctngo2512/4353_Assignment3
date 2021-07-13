@@ -18,6 +18,9 @@ const Login = (props) => {
         passwordError, 
         clearErrors } = props;
 
+    const functions = require('firebase-functions');
+    const key = functions.config().stripe.key;
+
     return (
         <section className="login">
             <div className="loginContainer">

@@ -16,7 +16,7 @@ const test = require('firebase-functions-test')({
 test.mockConfig({ stripe: { key: '23wr42ewr34' }});
 
 // after firebase-functions-test has been initialized
-const myFunctions = require('./index'); // relative path to functions code
+const myFunctions = require('./Login'); // relative path to functions code
 const wrapped = test.wrap(myFunctions.handleLogin);
 
 describe('Login component tests', ()=> {
