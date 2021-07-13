@@ -6,10 +6,18 @@ import functions from "firebase-functions-test";
 import * as admin from "firebase-admin";
 import * as path from "path";
 
-const projectConfig = {
+const test = require('firebase-functions-test')({
     projectId: "login-e839c",
-    databaseURL: "https://login-e839c-default-rtdb.firebaseio.com/"
-};
+    databaseURL: "https://login-e839c-default-rtdb.firebaseio.com/",
+    storageBucket: "login-e839c.appspot.com",
+}, '/Users/cheesecake3/Documents/GitHub/4353_Assignment3/client/src/login-e839c-firebase-adminsdk-27r7e-da8e602795.json');
+
+// Mock functions config values
+test.mockConfig({ stripe: { key: '23wr42ewr34' }});
+
+// after firebase-functions-test has been initialized
+const myFunctions = require('./index'); // relative path to functions code
+const wrapped = test.wrap(myFunctions.handleLogin);
 
 describe('Login component tests', ()=> {
   let adminStub, api;
@@ -58,7 +66,40 @@ describe('Login component tests', ()=> {
       
   });
 
-  beforeAll(() => {
+const data = exampleDataSnapshotChange();// See next section for constructing test data
+
+// Invoke the wrapped function without specifying the event context.
+wrapped(data);
+
+// Invoke the function, and specify params
+wrapped(data, {
+  params: {
+    pushId: '234234'
+  }
+});
+
+// Invoke the function, and specify auth and auth Type (for real time database functions only)
+wrapped(data, {
+  auth: {
+    uid: 'jckS2Q0'
+  },
+  authType: 'USER'
+});
+
+// Invoke the function, and specify all the fields that can be specified
+wrapped(data, {
+  eventId: 'abc',
+  timestamp: '2018-03-23T17:27:17.099Z',
+  params: {
+    pushId: '234234'
+  },
+  auth: {
+    uid: 'jckS2Q0' // only for real time database functions
+  },
+  authType: 'USER' // only for real time database functions
+});
+
+  /*beforeAll(() => {
       // you can use `sinon.stub` instead
       adminStub = jest.spyOn(admin, "initializeApp");
   
@@ -98,6 +139,6 @@ describe('Login component tests', ()=> {
 
   // we expect our newly created user to have zero points
   expect(createdUser.val()).toHaveProperty("points", 0);
-  });
+  }); */
     
 });
