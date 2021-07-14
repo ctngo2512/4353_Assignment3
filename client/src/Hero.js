@@ -20,7 +20,7 @@ const Hero = (props) => {
     const goBack = () => setCount(value => !value);
     //Once components load complete
     useEffect(() => {
-        fire.database().ref(userID).on('value', snapshot => {
+        fire.database().ref().on('value', snapshot => {
             if (snapshot.val() != null) {
                 setContactObjects({
                     ...snapshot.val()
