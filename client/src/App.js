@@ -14,6 +14,7 @@ const App = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [hasAccount, setHasAccount] = useState(false);
+  const [userID, setUserID] = useState('');
 
   //clear inputs
   const clearInputs = () => {
@@ -81,6 +82,8 @@ const App = () => {
       if (user){
         clearInputs();
         setUser(user);
+        //alert(user.uid);
+        setUserID(user.uid);
       }
       else {
         setUser("");
@@ -100,6 +103,7 @@ const App = () => {
           <div className="col-md-8 offset-md-2">
             <Hero
             handleLogout={handleLogout}
+            userID={userID}
           />
           </div>
         </div>
@@ -117,6 +121,7 @@ const App = () => {
           emailError={emailError}
           passwordError={passwordError}
           clearErrors={clearErrors}
+          user={setUser}
       />
       )}
       

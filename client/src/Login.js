@@ -16,6 +16,7 @@ const Login = (props) => {
         setHasAccount, 
         emailError, 
         passwordError, 
+       // user,
         clearErrors } = props;
 
     return (
