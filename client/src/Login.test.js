@@ -17,7 +17,7 @@ test.mockConfig({ stripe: { key: '23wr42ewr34' }});
 
 // after firebase-functions-test has been initialized
 const myFunctions = require('./Login'); // relative path to functions code
-const wrapped = test.wrap(myFunctions.handleLogin);
+//const wrapped = test.wrap(myFunctions.handleLogin);
 
 describe('Login component tests', ()=> {
   let adminStub, api;
@@ -27,7 +27,7 @@ describe('Login component tests', ()=> {
       shallow(<Login />);
   });
 
-  it('should have a btn component', ()=> {
+  /*it('should have a btn component', ()=> {
 
       //There should be only one button
       expect(wrapper.find('Button')).toHaveLength(1);
