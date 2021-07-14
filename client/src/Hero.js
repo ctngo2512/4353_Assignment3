@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import fire from "./fire";
 import ContactForm from "./contactForm";
 import FuelForm from './fuel';
 import {Button} from 'react-bootstrap';
 
 //runs profile page and fuel page
-const Hero = ({handleLogout}) => {
+const Hero = (props) => {
+    const {
+        handleLogout,
+        userID
+    } = props;
+
+
     var [currentId, setCurrentId] = useState('');
     var [contactObjects, setContactObjects] = useState({})
-
+    
     //variables to switch between profile page and fuel page
     const [count, setCount] = useState(false);
     const goBack = () => setCount(value => !value);
     //Once components load complete
     useEffect(() => {
-        fire.database().ref().child('Test').on('value', snapshot => {
+        fire.database().ref().on('value', snapshot => {
             if (snapshot.val() != null) {
                 setContactObjects({
                     ...snapshot.val()
@@ -24,9 +30,10 @@ const Hero = ({handleLogout}) => {
     }, [])
 
     //pushes profile contact info to the firebase database
-    const addOrEdit = (obj) => {
-        var db = fire.database().ref().child('Test').push(
-            obj,
+    const addOrEdit = (...obj) => {
+    
+        var db = fire.database().ref(userID).update(
+            ...obj,
             err => {
                 if(err)
                     console.log(err)
@@ -39,10 +46,13 @@ const Hero = ({handleLogout}) => {
     return (
         <div className="hero">
             {count ? (
+               
                 //runs fuel page
-            <div className="container">
+            <div className="container"> 
+                
                 <nav>
                     <h2>Welcome</h2>
+                  
                     <Button className="midButton" onClick = {goBack}>Back</Button>
                     <Button     //logout button
                     onClick={handleLogout}>Log Out</Button>
@@ -106,7 +116,7 @@ const Hero = ({handleLogout}) => {
                 <div className="row">
                     <div className="col-md-5">
                         <ContactForm            //display ContactForm
-                        {...({ currentId, contactObjects, addOrEdit })} ></ContactForm>
+                        {...({ currentId, contactObjects, addOrEdit })}></ContactForm>
                     </div>
                     <div className="col-md-7">
                         <table className="table table-borderless table-stripped">
