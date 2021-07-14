@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 //contact form takes user inputs for name, address....
 const ContactForm = (props) => {
 
-    const {currentId, contactObjects, addOrEdit} = props;
-
     const initialFieldValues = {
         name: '',
         address: '',
@@ -14,7 +12,7 @@ const ContactForm = (props) => {
         address2: ''
     }
     
-    var [values, setValues] = useState(initialFieldValues)
+    var [values, setValues] = useState(initialFieldValues);
 
     //if no input yet set to empty, else set values to user inputs
     useEffect(() => {
@@ -62,7 +60,7 @@ const ContactForm = (props) => {
                         </div>
                     </div>
 
-                    <input className="form-control" name="address" placeholder="Address"
+                    <input className="form-control" name="address" placeholder="Address Line 1"
                         value={values.address}
                         onChange={handleInputChange}
                     />
