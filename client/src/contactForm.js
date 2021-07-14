@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 //contact form takes user inputs for name, address....
 const ContactForm = (props) => {
 
+    const {currentId, contactObjects, addOrEdit} = props;
+
     const initialFieldValues = {
         name: '',
         address: '',
