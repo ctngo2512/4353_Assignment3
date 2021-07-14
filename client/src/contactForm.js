@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import fire from './fire';
 
 //contact form takes user inputs for name, address....
 const ContactForm = (props) => {

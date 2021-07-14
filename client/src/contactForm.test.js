@@ -3,9 +3,6 @@ import Enzyme from 'enzyme';
 import {shallow, mount} from 'enzyme';
 import ContactForm from './contactForm';
 import {handleFormSubmit} from './contactForm';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('Contact Form component tests', ()=> {
 

@@ -106,7 +106,7 @@ const Hero = ({handleLogout}) => {
                 <div className="row">
                     <div className="col-md-5">
                         <ContactForm            //display ContactForm
-                        {...({ currentId, contactObjects, addOrEdit })} ></ContactForm>
+                        {...({ currentId, contactObjects, addOrEdit })}></ContactForm>
                     </div>
                     <div className="col-md-7">
                         <table className="table table-borderless table-stripped">
