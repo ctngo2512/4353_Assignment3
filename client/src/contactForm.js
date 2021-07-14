@@ -4,6 +4,8 @@ import fire from './fire';
 //contact form takes user inputs for name, address....
 const ContactForm = (props) => {
 
+    const {currentId, contactObjects, addOrEdit}  = props;
+
     const initialFieldValues = {
         name: '',
         address: '',
