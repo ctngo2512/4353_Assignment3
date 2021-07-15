@@ -156,6 +156,7 @@ const Hero = (props) => {
                                 <tr>
                                     <th>Name</th>
                                     <th>Address</th>
+                                    <th>Address 2</th>
                                     <th>City</th>
                                     <th>State</th>
                                     <th>Zipcode</th>
@@ -167,6 +168,7 @@ const Hero = (props) => {
                                         <tr key={key}>
                                             <td>{contactObjects[key].name}</td>
                                             <td>{contactObjects[key].address}</td>
+                                            <td>{contactObjects[key].address2}</td>
                                             <td>{contactObjects[key].city}</td>
                                             <td>{contactObjects[key].state}</td>
                                             <td>{contactObjects[key].zipcode}</td>
