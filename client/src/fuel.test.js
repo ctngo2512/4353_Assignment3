@@ -4,7 +4,6 @@ import FuelForm from './fuel';
 import {handleFormSubmit} from './fuel';
 
 describe('Fuel page component tests', ()=> {
-    const wrapper = shallow(<FuelForm />);
 
     it("renders without crashing", () => {
         shallow(<FuelForm />);
