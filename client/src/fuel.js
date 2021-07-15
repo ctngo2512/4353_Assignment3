@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import fire from './fire';
 
 //form for company fuel inputs
 const FuelForm = (props) => {
@@ -12,14 +13,18 @@ const FuelForm = (props) => {
     }
 
     var [values, setValues] = useState(initialFieldValues)
+    
 
     useEffect(() => {
         if (props.currentId == '')
             setValues({ ...initialFieldValues })
-        else
+        else{
             setValues({
                 ...props.fuelObjects[props.currentId]
-            })
+            });
+        }
+        
+            
     }, [props.currentId, props.fuelObjects])
 
     const handleInputChange = e => {
@@ -32,7 +37,7 @@ const FuelForm = (props) => {
 
     const handleFormSubmit = e => {
         e.preventDefault()
-        props.addOrEdit(values);
+        props.gasFormEdit(values);
     }
 
     return (
