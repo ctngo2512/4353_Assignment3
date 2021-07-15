@@ -86,7 +86,7 @@ const Hero = (props) => {
                     <h2>Welcome</h2>
                   
                     <Button className="midButton" onClick = {goBack}>Back</Button>
-                    <Button     //logout button
+                    <Button className="logoutButt" //logout button
                     onClick={handleLogout}>Log Out</Button>
                 </nav>
                 <div className="jumbotron jumbotron-fluid">
