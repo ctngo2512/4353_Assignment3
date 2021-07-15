@@ -22,17 +22,23 @@ const FuelForm = (props) => {
             setValues({
                 ...props.fuelObjects[props.currentId]
             });
+            
         }
         
             
     }, [props.currentId, props.fuelObjects])
 
     const handleInputChange = e => {
-        var { name, value } = e.target;
+        var { name, value} = e.target;
+        
         setValues({
             ...values,
-            [name]: value
+            [name]: value,
+            //pseudo suggested price calculator
+            suggested_price: parseInt(values.gallon_requested)*1.50,
+            total_due: (parseFloat(values.suggested_price)*1.10).toFixed(2)
         })
+
     }
 
     const handleFormSubmit = e => {
