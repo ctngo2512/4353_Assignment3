@@ -11,17 +11,20 @@ const Hero = (props) => {
         userID
     } = props;
 
-
+    //functions
     var [currentId, setCurrentId] = useState('');
-    var [contactObjects, setContactObjects] = useState({})
-    
+    var [contactObjects, setContactObjects] = useState({});
+    var [fuelObjects, setFuelObjects] = useState({});
+
     //variables to switch between profile page and fuel page
     const [count, setCount] = useState(false);
     const goBack = () => setCount(value => !value);
     //Once components load complete
     useEffect(() => {
-        fire.database().ref().on('value', snapshot => {
+        fire.database().ref('Users/'+userID).on('value', snapshot => {
+            
             if (snapshot.val() != null) {
+                
                 setContactObjects({
                     ...snapshot.val()
                 });
@@ -29,16 +32,44 @@ const Hero = (props) => {
         })
     }, [])
 
+    useEffect(() => {
+        fire.database().ref('Users/'+userID+'/Transactions').on('value', snapshot => {
+            
+            if (snapshot.val() != null) {
+                
+                setFuelObjects({
+                    ...snapshot.val()
+                });
+            }
+        })
+    }, [props.userID])
+
+
+
     //pushes profile contact info to the firebase database
     const addOrEdit = (...obj) => {
     
-        var db = fire.database().ref(userID).update(
+        var db = fire.database().ref('Users/'+userID+'/Info').update(
             ...obj,
             err => {
                 if(err)
                     console.log(err)
                 else
                     setCurrentId('')
+            }
+        );
+    }
+
+    //addOrEdit for the gasForm
+    const gasFormEdit = (...obj) => {
+    
+        var db = fire.database().ref('Users/'+userID+'/Transactions').push(
+            ...obj,
+            err => {
+                if(err)
+                    console.log(err)
+                else
+                    setCurrentId(userID)
             }
         );
     }
@@ -65,7 +96,7 @@ const Hero = (props) => {
                 
                     <div className="row">
                     <div className="col-md-5">
-                    <FuelForm {...({ currentId, contactObjects, addOrEdit })}/>
+                    <FuelForm {...({ currentId, fuelObjects, gasFormEdit})}/>
                     </div>
                     <div className="col-md-7">
                         <table className="table table-borderless table-stripped">
@@ -80,13 +111,13 @@ const Hero = (props) => {
                             </thead>
                             <tbody>
                                 {
-                                    Object.keys(contactObjects).map((key) => (
+                                    Object.keys(fuelObjects).map((key) => (
                                         <tr key={key}>
-                                            <td>{contactObjects[key].gallon_requested}</td>
-                                            <td>{contactObjects[key].delivery_address}</td>
-                                            <td>{contactObjects[key].delivery_date}</td>
-                                            <td>{contactObjects[key].suggested_price}</td>
-                                            <td>{contactObjects[key].total_due}</td>
+                                            <td>{fuelObjects[key].gallon_requested}</td>
+                                            <td>{fuelObjects[key].delivery_address}</td>
+                                            <td>{fuelObjects[key].delivery_date}</td>
+                                            <td>{fuelObjects[key].suggested_price}</td>
+                                            <td>{fuelObjects[key].total_due}</td>
                                         </tr>
                                     ))
                                 }
