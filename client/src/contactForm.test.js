@@ -4,6 +4,7 @@ import ContactForm from './contactForm';
 import {handleFormSubmit} from './contactForm';
 import { act, render } from '@testing-library/react';
 import fire from './fire';
+import Hero from './Hero';
 
 describe('Contact Form component tests', ()=> {
     const wrapper = shallow(<ContactForm />);
@@ -28,7 +29,7 @@ describe('Contact Form component tests', ()=> {
         }));
     
         act(() => {
-            render(<ContactForm/>);
+            render(<Hero/>);
         });
     
         expect(wrapper.find('.name').textContent).toBe(fakeUser.name);
