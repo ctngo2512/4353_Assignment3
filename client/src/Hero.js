@@ -32,6 +32,7 @@ const Hero = (props) => {
         })
     }, [])
 
+    //mapping for the transactions table
     useEffect(() => {
         fire.database().ref('Users/'+userID+'/Transactions').on('value', snapshot => {
             
