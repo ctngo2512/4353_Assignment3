@@ -57,13 +57,24 @@ import { act, render } from '@testing-library/react';
         });
 
         it('should call onChange prop', () => {
+            const onSearchMock2 = jest.fn();
+            const event2 = {
+                preventDefault() {},
+                target: { value: 'the-value' }
+            };
+            const component2 = shallow(<Login setEmail={setEmail} />);
+            component2.find('.email').simulate('change', event2);
+            expect(onSearchMock2).toBeCalledWith('the-value');
+            });
+
+        it('should call onChange prop', () => {
             const onSearchMock = jest.fn();
             const event = {
               preventDefault() {},
               target: { value: 'the-value' }
             };
             const component = shallow(<Login setPassword={setPassword} />);
-            component.find('input').at(1).simulate('change', event);
+            component.find('.password').simulate('change', event);
             expect(onSearchMock).toBeCalledWith('the-value');
           });
         
