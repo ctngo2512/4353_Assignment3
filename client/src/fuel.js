@@ -42,7 +42,14 @@ const FuelForm = (props) => {
         })
 
     }
-    const handleValidation = values => {
+
+    const handleFormSubmit = e => {
+        e.preventDefault()
+        props.gasFormEdit(values);
+    }
+
+    //validation for fuel form 
+    handleValidation(){
         let fields = this.state.fields;
         let errors = {};
         let formIsValid = true;
@@ -54,7 +61,7 @@ const FuelForm = (props) => {
               
             const validateDate = (value) => {
               
-              if (validator.isDate(values.delivery_date)) {
+              if (validator.isDate(delivery_date)) {
                 setErrorMessage('Valid Date :)')
               } else {
                 setErrorMessage('Enter Valid Date in form of 00/00/0000')
@@ -103,16 +110,7 @@ const FuelForm = (props) => {
        this.setState({errors: errors});
        return formIsValid;
    }
-    }
 
-    const handleFormSubmit = e => {
-       
-        e.preventDefault()
-        props.gasFormEdit(values);
-    }
-
-    //validation for fuel form 
-    
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit}>
             <section className = "contact">
