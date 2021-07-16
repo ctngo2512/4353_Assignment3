@@ -134,13 +134,16 @@ const ContactForm = (props) => {
           }
             else if (values.zipcode.length > 9) {
                 errors.zipcode = 'The name provided is too long - max 50 characters please'
+                formIsValid=false;
                 alert("Zip code too long");
             }  
             else if(values.zipcode.length < 5){
+                formIsValid=false;
                 alert("Zip code too short");
             }
             
-            else if (!values.zipcode.match(/^[0-9]{5}(-[0-9]{3})?$/)){
+            else if (!values.zipcode.match(/^[0-9]{5}(-[0-9]{3})?$/) || !values.zipcode.match(/^(?:\d{5})?$/)){
+                formIsValid=false;
                 alert("Incorrect zip-code format");
             }
         }
@@ -154,7 +157,7 @@ const ContactForm = (props) => {
 
    //submitting form to firebase and prevent page refresh
    const handleFormSubmit = e => {
- //e.preventDefault()
+    e.preventDefault()
 
     if(handleValidation(values)){
         props.addOrEdit(values);

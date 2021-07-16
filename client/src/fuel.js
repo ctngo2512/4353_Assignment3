@@ -37,8 +37,8 @@ const FuelForm = (props) => {
             ...values,
             [name]: value,
             //pseudo suggested price calculator
-            suggested_price: parseFloat(values.gallon_requested)*1.50,
-            total_due: (parseFloat(values.suggested_price)*1.10).toFixed(2)
+            suggested_price: (parseInt(values.gallon_requested))*1.50,
+            total_due: (((parseInt(values.gallon_requested))*1.50)*1.10).toFixed(2)
         })
 
     }
@@ -112,10 +112,12 @@ const FuelForm = (props) => {
 
     const handleFormSubmit = e => {
        
-        alert(handleValidation(values));
+        
 
-        //e.preventDefault()
-        props.gasFormEdit(values);
+        e.preventDefault()
+        if(handleValidation(values)){
+         props.gasFormEdit(values);
+        }
         
     }
 
@@ -126,33 +128,41 @@ const FuelForm = (props) => {
             <section className = "contact">
             <div className="form-group input-group">
                 <div className="input-group-prepend">
-                    <div className="input-group-text">
-                    </div>
+                    <div className="input-group-text"/>
+                    
                 </div>
                 <input className="form-control" name="gallon_requested" placeholder="Gallons Requested"
                     value={values.gallon_requested}
                     onChange={handleInputChange}
                 />
             </div>
-            <div className="form-group input-group">
-                <div className="input-group-prepend">
-                    <div className="input-group-text">
-                    </div>
-                </div>
-                    <input className="form-control" name="delivery_address" placeholder="Delivery Address"
-                        value={values.address}
-                        onChange={handleInputChange}
-                    />
-                </div>
+            
                 <div className="form-group input-group">
-                <div className="input-group-prepend">
-                    <div className="input-group-text">
-                    </div>
-                </div>
-                    <input className="form-control" name="delivery_date" placeholder="Delivery Date"
-                        value={values.delivery_date}
-                        onChange={handleInputChange}
-                    />
+                <div className="input-group-prepend"/>
+                    
+            
+
+<div class="container">
+       
+     <form>
+         
+      <div class="col"> 
+      
+        <div class="form-group">
+            <div className="form-group input-group">   
+            <div class="input-group-prepend"/>
+            <div className="input-group-text"/>
+
+            <input type="date" class="form-control" id="pure-date" name="delivery_date" onChange={handleInputChange} aria-describedby="date-design-prepend"/>
+            </div>
+          </div>
+      </div>
+      
+          </form>
+        
+         
+ 
+</div>
                 </div>
             <div className="form-group">
                 <div className="savebtn">
