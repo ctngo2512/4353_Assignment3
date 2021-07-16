@@ -6,6 +6,8 @@ import validator from 'validator';
 //form for company fuel inputs
 const FuelForm = (props) => {
 
+    //alert(props.userAddress);
+    
     const initialFieldValues = {
         gallon_requested: '',
         delivery_address: '',
@@ -24,11 +26,16 @@ const FuelForm = (props) => {
             setValues({
                 ...props.fuelObjects[props.currentId]
             });
+
+           
             
         }
         
             
     }, [props.currentId, props.fuelObjects])
+
+
+    //alert(initialFieldValues.gallon_requested);
 
     const handleInputChange = e => {
         var { name, value} = e.target;
@@ -38,7 +45,8 @@ const FuelForm = (props) => {
             [name]: value,
             //pseudo suggested price calculator
             suggested_price: (parseInt(values.gallon_requested))*1.50,
-            total_due: (((parseInt(values.gallon_requested))*1.50)*1.10).toFixed(2)
+            total_due: (((parseInt(values.gallon_requested))*1.50)*1.10).toFixed(2),
+            delivery_address: props.userAddress
         })
 
     }
@@ -76,35 +84,7 @@ const FuelForm = (props) => {
          }  
             
         }
-            
-        /* 
    
-        //suggested price
-        if(!fields["suggested_price"]){
-            formIsValid = false;
-            errors["suggested_price"] = "Cannot be empty";
-         }
-   
-         if(typeof fields["suggested_price"] !== "undefined"){
-            if(!fields["suggested_price"].match(/^[0-9]+$/)){
-               formIsValid = false;
-               errors["suggested_price"] = "Only numbers";
-            }        
-         }
-         
-         //total due
-         if(!fields["total_due"]){
-            formIsValid = false;
-            errors["total_due"] = "Cannot be empty";
-         }
-   
-         if(typeof fields["total_due"] !== "undefined"){
-            if(!fields["total_due"].match(/^[0-9]+$/)){
-               formIsValid = false;
-               errors["total_due"] = "Only numbers";
-            }        
-         }
-*/
        //this.setState({errors: errors});
        return (formIsValid);
    }
@@ -112,9 +92,7 @@ const FuelForm = (props) => {
 
     const handleFormSubmit = e => {
        
-        
-
-        //e.preventDefault()
+        e.preventDefault()
         if(handleValidation(values)){
          props.gasFormEdit(values);
         }

@@ -15,6 +15,7 @@ const Hero = (props) => {
     var [currentId, setCurrentId] = useState('');
     var [contactObjects, setContactObjects] = useState({});
     var [fuelObjects, setFuelObjects] = useState({});
+    var userAddress = '';
 
     //variables to switch between profile page and fuel page
     const [count, setCount] = useState(false);
@@ -45,6 +46,21 @@ const Hero = (props) => {
         })
     }, [props.userID])
 
+    const queryRef = fire.database().ref('Users/'+userID+'/Info/');
+
+    const nameRef = queryRef.orderByKey();
+
+    //get address from database
+    nameRef.on('value', function(snapshot){
+        userAddress = Object.values(snapshot.val())[0];
+    })
+
+   
+   // alert(userAddress);
+
+   // alert(nameRef);
+
+    const {test} = contactObjects;
 
 
     //pushes profile contact info to the firebase database
@@ -97,7 +113,7 @@ const Hero = (props) => {
                 
                     <div className="row">
                     <div className="col-md-5">
-                    <FuelForm {...({ currentId, fuelObjects, gasFormEdit})}/>
+                    <FuelForm {...({ currentId, fuelObjects, gasFormEdit, userAddress})}/>
                     </div>
                     <div className="col-md-7">
                         <table className="table table-borderless table-stripped">

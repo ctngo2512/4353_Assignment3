@@ -157,13 +157,15 @@ const ContactForm = (props) => {
 
    //submitting form to firebase and prevent page refresh
    const handleFormSubmit = e => {
-    //e.preventDefault()
+    e.preventDefault()
 
     if(handleValidation(values)){
         props.addOrEdit(values);
     }
-}
+    }
+    //alert(values["name"]);
 
+    //alert(props.contactObjects[0]["name"]);
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit}>
             <section className = "contact">
