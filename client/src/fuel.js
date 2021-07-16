@@ -37,7 +37,7 @@ const FuelForm = (props) => {
             ...values,
             [name]: value,
             //pseudo suggested price calculator
-            suggested_price: parseInt(values.gallon_requested)*1.50,
+            suggested_price: parseFloat(values.gallon_requested)*1.50,
             total_due: (parseFloat(values.suggested_price)*1.10).toFixed(2)
         })
 
@@ -114,7 +114,7 @@ const FuelForm = (props) => {
        
         alert(handleValidation(values));
 
-        e.preventDefault()
+        //e.preventDefault()
         props.gasFormEdit(values);
         
     }

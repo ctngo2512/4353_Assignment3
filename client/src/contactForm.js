@@ -154,7 +154,7 @@ const ContactForm = (props) => {
 
    //submitting form to firebase and prevent page refresh
    const handleFormSubmit = e => {
-    e.preventDefault()
+ //e.preventDefault()
 
     if(handleValidation(values)){
         props.addOrEdit(values);
@@ -221,7 +221,7 @@ const ContactForm = (props) => {
                     value={values.state}
                     //pull down option for state
                     onChange={handleInputChange}>
-                        <option value="" disabled selected>Select your state</option>
+                        <option value="DEFAULT" disabled>Select your state</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>
