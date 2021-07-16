@@ -114,7 +114,7 @@ const FuelForm = (props) => {
        
         
 
-        e.preventDefault()
+        //e.preventDefault()
         if(handleValidation(values)){
          props.gasFormEdit(values);
         }

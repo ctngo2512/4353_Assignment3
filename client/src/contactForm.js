@@ -157,7 +157,7 @@ const ContactForm = (props) => {
 
    //submitting form to firebase and prevent page refresh
    const handleFormSubmit = e => {
-    e.preventDefault()
+    //e.preventDefault()
 
     if(handleValidation(values)){
         props.addOrEdit(values);
