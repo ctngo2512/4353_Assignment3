@@ -42,6 +42,106 @@ const ContactForm = (props) => {
         props.addOrEdit(values);
     }
 
+    const handleValidation = values => {
+       
+        //let fields caused an issue with refreshing and not inputting data
+        //let fields = this.values.fields;
+        let errors = {};
+        let formIsValid = true;
+
+        //Full Name
+        if(values.name =='' || values.name==null){
+            formIsValid = false;
+            errors["name"] = "Cannot be empty";
+            alert("Name cannot be empty");
+         }else{
+ 
+         if(!values.name.match(/^[a-zA-Z]+$/)){
+             formIsValid = false;
+             errors["name"] = "Only letters";
+             alert("Letters only in name field");
+          }
+         else if (values.name.length > 50) {
+            errors.name = 'The name provided is too long - max 50 characters please'
+            }        
+        }  
+
+         //Address 1
+         if(values.address =='' || values.address==null){
+            formIsValid = false;
+            errors["address"] = "Cannot be empty";
+            alert("address cannot be empty");
+         }else{
+ 
+         if(!values.address.match(/^[a-zA-Z]+$/)){
+             formIsValid = false;
+             errors["address"] = "Only letters";
+             alert("Letters only in address field");
+          }
+         else if (values.address.length > 100) {
+            errors.name = 'The address provided is too long - max 100 characters please'
+            }        
+        }
+
+
+         //Address 2
+         if(values.address2 =='' || values.address2==null){
+            formIsValid = false;
+            errors["address2"] = "Cannot be empty";
+            alert("address2 cannot be empty");
+         }else{
+ 
+         if(!values.address2.match(/^[a-zA-Z]+$/)){
+             formIsValid = false;
+             errors["address2"] = "Only letters";
+             alert("Letters only in address2 field");
+          }
+         else if (values.address2.length > 100) {
+            errors.name = 'The address provided is too long - max 100 characters please'
+            }        
+        }
+
+         //City
+         if(values.city =='' || values.city==null){
+            formIsValid = false;
+            errors["city"] = "Cannot be empty";
+            alert("city cannot be empty");
+         }else{
+ 
+         if(!values.city.match(/^[a-zA-Z]+$/)){
+             formIsValid = false;
+             errors["city"] = "Only letters";
+             alert("Letters only in city field");
+          }
+         else if (values.name.length > 100) {
+            errors.name = 'The city provided is too long - max 50 characters please'
+            }        
+        }
+
+         //Zipcode
+         if(values.zipcode =='' || values.zipcode==null){
+            formIsValid = false;
+            errors["zipcode"] = "Cannot be empty";
+            alert("zipcode cannot be empty");
+         }else{
+ 
+         if(!values.zipcode.match(/^[0-9]+$/)){
+             formIsValid = false;
+             errors["zipcode"] = "Only numbers";
+             alert("Numbers only in name field");
+          }
+         else if (values.zipcode.length > 50) {
+            errors.zipcode = 'The name provided is too long - max 50 characters please'
+            }        
+        }
+
+
+        //alert(values.delivery_date);
+
+       //this.setState({errors: errors});
+       return (formIsValid);
+   }
+
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit}>
             <section className = "contact">
