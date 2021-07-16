@@ -36,11 +36,130 @@ const ContactForm = (props) => {
         })
     }
 
-    //submitting form to firebase and prevent page refresh
-    const handleFormSubmit = e => {
-        e.preventDefault()
+    const handleValidation = values => {
+       
+        //let fields caused an issue with refreshing and not inputting data
+        //let fields = this.values.fields;
+        let errors = {};
+        let formIsValid = true;
+
+        //---Name---
+        if(values.name =='' || values.name==null){
+            formIsValid = false;
+            errors["name"] = "Cannot be empty";
+            alert("Name cannot be empty");
+         }else{
+ 
+         if(!values.name.match(/^[a-zA-Z\s]*$/)){
+             formIsValid = false;
+             errors["name"] = "Only letters";
+             alert("Letters only in name field");
+          }
+         else if (values.name.length > 50) {
+            errors.name = 'The name provided is too long - max 50 characters please'
+            }        
+        }  
+
+         //---Address 1---
+         if(values.address =='' || values.address==null){
+            formIsValid = false;
+            errors["address"] = "Cannot be empty";
+            alert("address cannot be empty");
+         }else{
+ 
+         if(!values.address.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)){
+             formIsValid = false;
+             errors["address"] = "Only letters";
+             alert("Letters and numbers only in address field");
+          }
+         else if (values.address.length > 100) {
+            errors.name = 'The address provided is too long - max 100 characters please'
+            }        
+        }
+
+
+         //---Address 2---
+         if(values.address2 != null && values.address2!=''){
+            if(!values.address2.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)){
+             formIsValid = false;
+             errors["address2"] = "Only letters";
+             alert("Letters and number only in address2 field");
+          }
+         else if (values.address2.length > 100) {
+            errors.name = 'The address provided is too long - max 100 characters please'
+            alert("Address2 is too long");
+            }        
+        }
+
+         //----City----
+         if(values.city =='' || values.city==null){
+            formIsValid = false;
+            errors["city"] = "Cannot be empty";
+            alert("city cannot be empty");
+         }else{
+ 
+         if(!values.city.match(/^[a-zA-Z]+$/)){
+             formIsValid = false;
+             errors["city"] = "Only letters";
+             alert("Letters only in city field");
+          }
+         else if (values.name.length > 100) {
+            errors.name = 'The city provided is too long - max 50 characters please'
+            }        
+        }
+
+        //----State----
+        if(values.state =='' || values.state==null){
+            formIsValid=false;
+            alert("State cannot be empty");
+        }
+
+   
+        else if(!values.state.match(/^[a-zA-Z\s]*$/)){
+            formIsValid=false;
+            alert("Invalid selection");
+        }
+
+         //----Zipcode---
+         if(values.zipcode =='' || values.zipcode==null){
+            formIsValid = false;
+            errors["zipcode"] = "Cannot be empty";
+            alert("zipcode cannot be empty");
+         }else{
+ 
+         if(!values.zipcode.match(/^[0-9]([0-9]|-(?!-))+$/)){
+             formIsValid = false;
+             errors["zipcode"] = "Only numbers";
+             alert("Numbers only in name field");
+          }
+            else if (values.zipcode.length > 9) {
+                errors.zipcode = 'The name provided is too long - max 50 characters please'
+                alert("Zip code too long");
+            }  
+            else if(values.zipcode.length < 5){
+                alert("Zip code too short");
+            }
+            
+            else if (!values.zipcode.match(/^[0-9]{5}(-[0-9]{3})?$/)){
+                alert("Incorrect zip-code format");
+            }
+        }
+
+
+        //alert(values.delivery_date);
+
+       //this.setState({errors: errors});
+       return (formIsValid);
+   }
+
+   //submitting form to firebase and prevent page refresh
+   const handleFormSubmit = e => {
+    e.preventDefault()
+
+    if(handleValidation(values)){
         props.addOrEdit(values);
     }
+}
 
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit}>
