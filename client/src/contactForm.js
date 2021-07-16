@@ -36,12 +36,6 @@ const ContactForm = (props) => {
         })
     }
 
-    //submitting form to firebase and prevent page refresh
-    const handleFormSubmit = e => {
-        e.preventDefault()
-        props.addOrEdit(values);
-    }
-
     const handleValidation = values => {
        
         //let fields caused an issue with refreshing and not inputting data
@@ -49,14 +43,14 @@ const ContactForm = (props) => {
         let errors = {};
         let formIsValid = true;
 
-        //Full Name
+        //---Name---
         if(values.name =='' || values.name==null){
             formIsValid = false;
             errors["name"] = "Cannot be empty";
             alert("Name cannot be empty");
          }else{
  
-         if(!values.name.match(/^[a-zA-Z]+$/)){
+         if(!values.name.match(/^[a-zA-Z\s]*$/)){
              formIsValid = false;
              errors["name"] = "Only letters";
              alert("Letters only in name field");
@@ -66,17 +60,17 @@ const ContactForm = (props) => {
             }        
         }  
 
-         //Address 1
+         //---Address 1---
          if(values.address =='' || values.address==null){
             formIsValid = false;
             errors["address"] = "Cannot be empty";
             alert("address cannot be empty");
          }else{
  
-         if(!values.address.match(/^[a-zA-Z]+$/)){
+         if(!values.address.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)){
              formIsValid = false;
              errors["address"] = "Only letters";
-             alert("Letters only in address field");
+             alert("Letters and numbers only in address field");
           }
          else if (values.address.length > 100) {
             errors.name = 'The address provided is too long - max 100 characters please'
@@ -84,24 +78,20 @@ const ContactForm = (props) => {
         }
 
 
-         //Address 2
-         if(values.address2 =='' || values.address2==null){
-            formIsValid = false;
-            errors["address2"] = "Cannot be empty";
-            alert("address2 cannot be empty");
-         }else{
- 
-         if(!values.address2.match(/^[a-zA-Z]+$/)){
+         //---Address 2---
+         if(values.address2 != null && values.address2!=''){
+            if(!values.address2.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)){
              formIsValid = false;
              errors["address2"] = "Only letters";
-             alert("Letters only in address2 field");
+             alert("Letters and number only in address2 field");
           }
          else if (values.address2.length > 100) {
             errors.name = 'The address provided is too long - max 100 characters please'
+            alert("Address2 is too long");
             }        
         }
 
-         //City
+         //----City----
          if(values.city =='' || values.city==null){
             formIsValid = false;
             errors["city"] = "Cannot be empty";
@@ -118,21 +108,41 @@ const ContactForm = (props) => {
             }        
         }
 
-         //Zipcode
+        //----State----
+        if(values.state =='' || values.state==null){
+            formIsValid=false;
+            alert("State cannot be empty");
+        }
+
+   
+        else if(!values.state.match(/^[a-zA-Z\s]*$/)){
+            formIsValid=false;
+            alert("Invalid selection");
+        }
+
+         //----Zipcode---
          if(values.zipcode =='' || values.zipcode==null){
             formIsValid = false;
             errors["zipcode"] = "Cannot be empty";
             alert("zipcode cannot be empty");
          }else{
  
-         if(!values.zipcode.match(/^[0-9]+$/)){
+         if(!values.zipcode.match(/^[0-9]([0-9]|-(?!-))+$/)){
              formIsValid = false;
              errors["zipcode"] = "Only numbers";
              alert("Numbers only in name field");
           }
-         else if (values.zipcode.length > 50) {
-            errors.zipcode = 'The name provided is too long - max 50 characters please'
-            }        
+            else if (values.zipcode.length > 9) {
+                errors.zipcode = 'The name provided is too long - max 50 characters please'
+                alert("Zip code too long");
+            }  
+            else if(values.zipcode.length < 5){
+                alert("Zip code too short");
+            }
+            
+            else if (!values.zipcode.match(/^[0-9]{5}(-[0-9]{3})?$/)){
+                alert("Incorrect zip-code format");
+            }
         }
 
 
@@ -141,6 +151,15 @@ const ContactForm = (props) => {
        //this.setState({errors: errors});
        return (formIsValid);
    }
+
+   //submitting form to firebase and prevent page refresh
+   const handleFormSubmit = e => {
+    e.preventDefault()
+
+    if(handleValidation(values)){
+        props.addOrEdit(values);
+    }
+}
 
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit}>
