@@ -15,7 +15,7 @@ const FuelForm = (props) => {
     }
 
     var [values, setValues] = useState(initialFieldValues)
-    
+    const [errorMessage, setErrorMessage] = useState('')
 
     useEffect(() => {
         if (props.currentId == '')
@@ -42,37 +42,42 @@ const FuelForm = (props) => {
         })
 
     }
+    const validateDate = (value) => {
+              
+        if (validator.isDate(values.delivery_date)) {
+          setErrorMessage('Valid Date :)')
+        } else {
+          setErrorMessage('Enter Valid Date in form of 00/00/0000')
+        }
+      }
+
     const handleValidation = values => {
-        let fields = this.state.fields;
+       
+        //let fields caused an issue with refreshing and not inputting data
+       //let fields = this.values.fields;
         let errors = {};
         let formIsValid = true;
 
         //date
-        const App = () => {
-  
-            const [errorMessage, setErrorMessage] = useState('')
-              
-            const validateDate = (value) => {
-              
-              if (validator.isDate(values.delivery_date)) {
-                setErrorMessage('Valid Date :)')
-              } else {
-                setErrorMessage('Enter Valid Date in form of 00/00/0000')
-              }
-            }
+
+        //alert(values.delivery_date);
 
         //gallons requested
-        if(!fields["gallon_requested"]){
+        if(values.gallon_requested=='' || values.gallon_requested==null){
            formIsValid = false;
            errors["gallon_requested"] = "Cannot be empty";
+           alert("Gallons requested cannot be empty");
+        }else{
+
+        if(!values.gallon_requested.match(/^[0-9]+$/)){
+            formIsValid = false;
+            errors["gallon_requested"] = "Only numbers";
+            alert("Numbers only in gallons requested field");
+         }  
+            
         }
-  
-        if(typeof fields["gallon_requested"] !== "undefined"){
-           if(!fields["gallon_requested"].match(/^[0-9]+$/)){
-              formIsValid = false;
-              errors["gallon_requested"] = "Only numbers";
-           }        
-        }
+            
+        /* 
    
         //suggested price
         if(!fields["suggested_price"]){
@@ -99,16 +104,19 @@ const FuelForm = (props) => {
                errors["total_due"] = "Only numbers";
             }        
          }
-
-       this.setState({errors: errors});
-       return formIsValid;
+*/
+       //this.setState({errors: errors});
+       return (formIsValid);
    }
-    }
+    
 
     const handleFormSubmit = e => {
        
+        alert(handleValidation(values));
+
         e.preventDefault()
         props.gasFormEdit(values);
+        
     }
 
     //validation for fuel form 
