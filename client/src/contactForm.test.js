@@ -32,7 +32,7 @@ describe('Contact Form component tests', ()=> {
             render(<Hero/>);
         });
     
-        expect(wrapper.find('.name').textContent).toBe(fakeUser.name);
+        expect(wrapper.find('.Name').textContent).toBe(fakeUser.name);
         expect(wrapper.find('.address').textContent).toBe(fakeUser.address);
         expect(wrapper.find('.city').textContent).toBe(fakeUser.city);
         expect(wrapper.find('.state').textContent).toBe(fakeUser.state);

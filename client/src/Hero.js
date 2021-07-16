@@ -50,7 +50,7 @@ const Hero = (props) => {
     //pushes profile contact info to the firebase database
     const addOrEdit = (...obj) => {
     
-        var db = fire.database().ref('Users/'+userID+'/Info').update(
+        fire.database().ref('Users/'+userID+'/Info').update(
             ...obj,
             err => {
                 if(err)
@@ -64,7 +64,7 @@ const Hero = (props) => {
     //addOrEdit for the gasForm
     const gasFormEdit = (...obj) => {
     
-        var db = fire.database().ref('Users/'+userID+'/Transactions').push(
+        fire.database().ref('Users/'+userID+'/Transactions').push(
             ...obj,
             err => {
                 if(err)

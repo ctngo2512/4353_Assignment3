@@ -51,10 +51,12 @@ const ContactForm = (props) => {
                         <i className="fas fa-user"></i>
                     </div>
                 </div>
+                <div className = 'Name'>
                 <input className="form-control" name="name" placeholder="Full Name"
                     value={values.name}
                     onChange={handleInputChange}
                 />
+                </div>
             </div>
             <div className="form-row">
                 <div className="form-group input-group col-md-6">

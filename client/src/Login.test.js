@@ -1,7 +1,11 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
+import Enzyme from 'enzyme';
 import Login from './Login';
 import hasAccount from './Login';
+import {setEmail} from './Login';
+import {setPassword} from './Login';
+import { act, render } from '@testing-library/react';
 
     describe('Login component tests', ()=> {
         const wrapper = shallow(<Login />);
@@ -51,5 +55,16 @@ import hasAccount from './Login';
             //console.log("TEST THIS" + wrapper.find('.email').text() + "TEST");
            
         });
+
+        it('should call onChange prop', () => {
+            const onSearchMock = jest.fn();
+            const event = {
+              preventDefault() {},
+              target: { value: 'the-value' }
+            };
+            const component = shallow(<Login setPassword={setPassword} />);
+            component.find('input').at(1).simulate('change', event);
+            expect(onSearchMock).toBeCalledWith('the-value');
+          });
         
     });
