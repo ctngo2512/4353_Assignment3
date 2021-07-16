@@ -1,0 +1,21 @@
+4354 Assignment 3
+Group 2: Jordan Foster, Chi Ngo, Christopher Randall
+
+Answer these questions:
+
+1.	Provide link to GitHub repository for TAs to view the code.(5 points)
+https://github.com/ctngo2512/4353_Assignment3.git
+
+2.	List what backend technologies you are using and why? (2 points)
+We are using javascript for backend and using jest for testing code coverage.
+
+3.	Provide code coverage report. (3 points)
+
+4.	IMPORTANT: list who did what within the group. TAs should be able to validate in GitHub, otherwise team members who didn't contribute will receive a ZERO.
+We already implemented most of backend and database from previous assignment so our last submission for Assignment 2 can be referred to as well.
+
+Chi: code coverage
+
+Jordan: input validations for contact form and fuel form and connecting forms to database, separating each user as a child in firebase and making branches for the data in firebase
+
+Chris: input validations for contact form and fuel form
