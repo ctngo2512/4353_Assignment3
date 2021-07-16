@@ -73,6 +73,7 @@ const ContactForm = (props) => {
              alert("Letters and numbers only in address field");
           }
          else if (values.address.length > 100) {
+            formIsValid = false;
             errors.name = 'The address provided is too long - max 100 characters please'
             }        
         }
@@ -86,6 +87,7 @@ const ContactForm = (props) => {
              alert("Letters and number only in address2 field");
           }
          else if (values.address2.length > 100) {
+            formIsValid = false;
             errors.name = 'The address provided is too long - max 100 characters please'
             alert("Address2 is too long");
             }        
@@ -104,6 +106,7 @@ const ContactForm = (props) => {
              alert("Letters only in city field");
           }
          else if (values.name.length > 100) {
+            formIsValid = false;
             errors.name = 'The city provided is too long - max 50 characters please'
             }        
         }
