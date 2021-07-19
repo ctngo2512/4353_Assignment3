@@ -44,8 +44,6 @@ describe('Contact Form component tests', ()=> {
         const wrapper = shallow(<ContactForm onSubmit={handleFormSubmit}/>);
         const form = wrapper.find('form');
         form.simulate('submit');
-        // You can also use the exact error message or a regexp
-        expect(handleValidation).toBeCalled();
     })
 
 

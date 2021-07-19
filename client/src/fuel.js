@@ -91,8 +91,8 @@ const FuelForm = (props) => {
     
 
     const handleFormSubmit = e => {
-       
-        e.preventDefault()
+        if (e)
+            e.preventDefault()
         if(handleValidation(values)){
          props.gasFormEdit(values);
         }
@@ -107,40 +107,25 @@ const FuelForm = (props) => {
             <div className="form-group input-group">
                 <div className="input-group-prepend">
                     <div className="input-group-text"/>
-                    
                 </div>
                 <input className="form-control" name="gallon_requested" placeholder="Gallons Requested"
                     value={values.gallon_requested}
                     onChange={handleInputChange}
                 />
             </div>
-            
                 <div className="form-group input-group">
                 <div className="input-group-prepend"/>
-                    
-            
-
-<div class="container">
-       
-     <form>
-         
-      <div class="col"> 
-      
-        <div class="form-group">
-            <div className="form-group input-group">   
-            <div class="input-group-prepend"/>
-            <div className="input-group-text"/>
-
-            <input type="date" class="form-control" id="pure-date" name="delivery_date" onChange={handleInputChange} aria-describedby="date-design-prepend"/>
+        <div className="container">
+            <div className="col"> 
+                <div className="form-group">
+                    <div className="form-group input-group">   
+                    <div className="input-group-prepend"/>
+                    <div className="input-group-text"/>
+                    <input type="date" className="form-control" id="pure-date" name="delivery_date" onChange={handleInputChange} aria-describedby="date-design-prepend"/>
+                    </div>
+                </div>
             </div>
-          </div>
-      </div>
-      
-          </form>
-        
-         
- 
-</div>
+         </div>
                 </div>
             <div className="form-group">
                 <div className="savebtn">

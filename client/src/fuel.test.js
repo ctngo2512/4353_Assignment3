@@ -17,7 +17,7 @@ describe('Fuel page component tests', ()=> {
     it ('calls onSubmit prop function when form is submitted', () => {
         const wrapper = shallow(<FuelForm onSubmit={handleFormSubmit}/>);
         const form = wrapper.find('form');
-        form.at(1).simulate('submit');
+        form.simulate('submit');
     })
 
     it('Renders user data', () => {
